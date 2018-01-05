@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafico de clasificaciones de palabras</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+</head>
+<body>
+
+    <canvas id="bar-chart" width="800" height="450"></canvas>
+
+    {% block javascript %}
+    <script>
+
+
+        new Chart(document.getElementById("bar-chart"), {
+            type: 'bar',
+            data: {
+                labels: {{labels}},
+                datasets: [{
+                    label: {{legend}},
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: [{% for item in resultados %}
+                            {{item}},
+                            {% endfor %}]
+                            }
+                   ]},
+            options: {
+                legend: { display: true },
+                title: {display: true, text: 'Clasificacion de palabras por texto'}
+                }
+        });
+
+    </script>
+    {% endblock %}
+</body>
+</html>
